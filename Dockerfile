@@ -45,11 +45,9 @@ elif [ "\$app" = "Keep" ] ; then
 	python3 run_page/keep_sync.py \${keep_phone_number} \${keep_password};
 else
 	echo "Unknown app" ;
-fi\
+fi
 
-python3 run_page/gen_svg.py --from-db --title "my running page" --type grid --athlete "\$YOUR_NAME" --output assets/grid.svg --min-distance 10.0 --special-color yellow --special-color2 red --special-distance 20 --special-distance2 40 --use-localtime \
-&& python3 run_page/gen_svg.py --from-db --title "my running page" --type github --athlete "\$YOUR_NAME" --special-distance 10 --special-distance2 20 --special-color yellow --special-color2 red --output assets/github.svg --use-localtime --min-distance 0.5 \
-&& python3 run_page/gen_svg.py --from-db --type circular --use-localtime
+python3 run_page/gen_svg.py --from-db --title "my running page" --type grid --athlete "\$YOUR_NAME" --output assets/grid.svg --min-distance 10.0 --special-color yellow --special-color2 red --special-distance 20 --special-distance2 40 --use-localtime && python3 run_page/gen_svg.py --from-db --title "my running page" --type github --athlete "\$YOUR_NAME" --special-distance 10 --special-distance2 20 --special-color yellow --special-color2 red --output assets/github.svg --use-localtime --min-distance 0.5 && python3 run_page/gen_svg.py --from-db --type circular --use-localtime
 
 pnpm run build
 
