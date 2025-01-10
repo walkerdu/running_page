@@ -58,4 +58,4 @@ mv /root/running_page/dist/* /var/www/html/
 cp -R /root/running_page/assets/* /var/www/html/assets/
 EOF
 
-CMD ["nginx", "-g", "daemon off;"]
+ENTRYPOINT ["nginx", "-g", "daemon off;"]
