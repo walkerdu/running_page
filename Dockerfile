@@ -1,4 +1,4 @@
-FROM python:3.10.16-slim-bookworm
+FROM python:3.11.15-slim-trixie
 
 WORKDIR /root/running_page
 COPY ./requirements.txt /root/running_page/requirements.txt
