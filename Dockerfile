@@ -42,7 +42,7 @@ elif [ "\$app" = "Strava" ] ; then
 elif [ "\$app" = "Nike_to_Strava" ] ; then
 	python3  run_page/nike_to_strava_sync.py \${nike_refresh_token} \${client_id} \${client_secret} \${refresh_token};
 elif [ "\$app" = "Keep" ] ; then
-	python3 run_page/keep_sync.py \${keep_phone_number} \${keep_password};
+	python3 run_page/keep_sync.py \${keep_phone_number} \${keep_password} \${keep_extra_opts};
 else
 	echo "Unknown app" ;
 fi
