@@ -62,6 +62,9 @@ def point_in_list_points_range(
 def range_hiding(
     polyline: list[tuple[float]], points: list[tuple[float]], distance: int
 ) -> list[tuple[float]]:
+    # Not configured -> no-op. Also skips a pointless O(n*m) scan.
+    if not points or distance <= 0:
+        return polyline
     return [
         point
         for point in polyline
@@ -70,6 +73,13 @@ def range_hiding(
 
 
 def start_end_hiding(polyline: list[tuple[float]], distance: int) -> list[tuple[float]]:
+    # Not configured -> no-op.
+    # Without this guard `starting_distance > distance` is already satisfied by
+    # the very first segment when distance == 0, so one point would be stripped
+    # from each end on *every* call, making filter_out non-idempotent.
+    if distance <= 0:
+        return polyline
+
     start_index, end_index = 0, len(polyline) - 1
 
     starting_distance = 0
@@ -95,6 +105,9 @@ def start_end_hiding(polyline: list[tuple[float]], distance: int) -> list[tuple[
 def filter_out(polyline_str):
     if not polyline_str:
         return
+    # No privacy filtering configured at all -> return the polyline untouched.
+    if not IGNORE_POLYLINE and IGNORE_RANGE <= 0 and IGNORE_START_END_RANGE <= 0:
+        return polyline_str
     pl = polyline.decode(polyline_str)
     if not pl:
         return polyline_str

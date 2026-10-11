@@ -38,25 +38,14 @@ const validateRoute = (activity: MappedActivity): boolean => {
   }
 };
 
-/** Choose a route for display without copying it into the selected activity. */
+/**
+ * Choose a route for display without copying it into the selected activity.
+ * Fallback to an earlier activity's track is disabled on purpose: an activity
+ * without usable GPS shows an empty map instead of borrowing someone's route.
+ */
 export function routeForActivity<T extends MappedActivity>(
   selected: T,
-  activities: readonly T[]
+  _activities: readonly T[]
 ): T | null {
-  if (hasRoute(selected)) return selected;
-  let latest: T | null = null;
-  let latestLocal = '';
-  for (const activity of activities) {
-    // The generator exports zero-padded local timestamps in this same order.
-    const local = activity.start_date_local;
-    if (
-      local < selected.start_date_local &&
-      local > latestLocal &&
-      hasRoute(activity)
-    ) {
-      latest = activity;
-      latestLocal = local;
-    }
-  }
-  return latest;
+  return hasRoute(selected) ? selected : null;
 }

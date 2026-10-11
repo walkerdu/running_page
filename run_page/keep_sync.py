@@ -26,7 +26,8 @@ from generator import Generator
 
 from utils import adjust_time
 
-KEEP_SPORT_TYPES = ["running", "hiking", "cycling"]
+#KEEP_SPORT_TYPES = ["running", "hiking", "cycling"]
+KEEP_SPORT_TYPES = ["running", "hiking"]
 KEEP2STRAVA = {
     "outdoorWalking": "Walk",
     "outdoorRunning": "Run",
